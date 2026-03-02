@@ -18,18 +18,16 @@ class DataGenerator:
 
     def _generate_random_data(self, _min=100, _max=1000):
         self.demand = [self.args['demand_per_customer']] * self.args['I']
-        self.e_t = np.random.choice(
-            range(self.args['day_start'], self.args['day_end'] - 1),
-            self.args['I']
-            ).tolist()
-        time_duration = np.random.choice(
-            list(range(self.args['max_time_window_length'])),
-            self.args['I']
-            )
-        time_duration = time_duration.tolist()
-        self.l_t = [min(s + d, self.args['day_end']) for s, d in
-                    zip(self.e_t, time_duration)
-                    ]
+        e_t_arr = np.random.randint(
+            self.args['day_start'], self.args['day_end'] - 1,
+            size=self.args['I']
+        )
+        self.e_t = e_t_arr.tolist()
+        time_duration = np.random.randint(
+            0, self.args['max_time_window_length'],
+            size=self.args['I']
+        )
+        self.l_t = np.minimum(e_t_arr + time_duration, self.args['day_end']).tolist()
         self.travel_time_matrix = self.args['travel_time_factor'] * (
             self.dist_matrix / self.args['r']
         )
