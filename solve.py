@@ -52,11 +52,6 @@ if __name__ == '__main__':
     )
     # Solve the optimization problem
     model = ConstructModel(data)
-    # Set aggressive solver parameters for CVRPTW
-    model.model.Params.Presolve = 2  # Aggressive presolve
-    model.model.Params.Cuts = 2      # Aggressive cuts
-    model.model.Params.Heuristics = 0.1  # Spend 10% time on heuristics
-    model.model.Params.MIPFocus = 1  # Focus on finding feasible solutions quickly
     model.solve()
     # Plot the solution routes
     data._plot_routes(model._routes)
