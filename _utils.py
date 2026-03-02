@@ -59,7 +59,7 @@ def extract_routes(x_matrix: np.array) -> list:
         route_terminated = False
         while not route_terminated:
             start = routes[vehicle][-1]
-            next_customer = np.where(x_matrix[start] == 1)[0]
+            next_customer = np.where(x_matrix[start] == 1)[0][0]
             if next_customer == 0:
                 routes[vehicle].append(0)
                 route_terminated = True
