@@ -12,6 +12,7 @@ M = 1e10  # A big number (theoretically, infinity)
 class ConstructModel(gb.Model):
     def __init__(self, data):
         super().__init__()  # Initialize Gurobi Model
+        self.Params.LogFile = "gurobi.log"
         self._routes = []
         self._dt = data
         self._n = self._dt.args['I'] + 1  # Number of nodes (including depot)
